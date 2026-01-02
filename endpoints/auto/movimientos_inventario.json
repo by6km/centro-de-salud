@@ -1,0 +1,70 @@
+{
+    "getAll": {
+        "description": "Gets all entries from 'movimientos_inventario'",
+        "route": "/movimientos_inventario",
+        "method": "GET",
+        "sql": "SELECT * FROM movimientos_inventario",
+        "auth_required": false,
+        "allowed_roles": [
+            "*"
+        ]
+    },
+    "getById": {
+        "description": "Gets an entry from 'movimientos_inventario' by its primary key",
+        "route": "/movimientos_inventario/$movimiento_id",
+        "method": "GET",
+        "sql": "SELECT * FROM movimientos_inventario WHERE movimiento_id = $movimiento_id",
+        "auth_required": false,
+        "allowed_roles": [
+            "*"
+        ]
+    },
+    "create": {
+        "description": "Creates a new entry in 'movimientos_inventario'",
+        "route": "/movimientos_inventario",
+        "method": "POST",
+        "sql": "INSERT INTO movimientos_inventario (inventario_id, cita_id, empleado_id, tipo_movimiento, cantidad, motivo, fecha_movimiento) VALUES ($inventario_id, $cita_id, $empleado_id, $tipo_movimiento, $cantidad, $motivo, $fecha_movimiento)",
+        "request_body_params": [
+            "inventario_id",
+            "cita_id",
+            "empleado_id",
+            "tipo_movimiento",
+            "cantidad",
+            "motivo",
+            "fecha_movimiento"
+        ],
+        "auth_required": true,
+        "allowed_roles": [
+            "*"
+        ]
+    },
+    "update": {
+        "description": "Updates an existing entry in 'movimientos_inventario' by its primary key",
+        "route": "/movimientos_inventario/$movimiento_id",
+        "method": "PUT",
+        "sql": "UPDATE movimientos_inventario SET inventario_id = $inventario_id, cita_id = $cita_id, empleado_id = $empleado_id, tipo_movimiento = $tipo_movimiento, cantidad = $cantidad, motivo = $motivo, fecha_movimiento = $fecha_movimiento WHERE movimiento_id = $movimiento_id",
+        "request_body_params": [
+            "inventario_id",
+            "cita_id",
+            "empleado_id",
+            "tipo_movimiento",
+            "cantidad",
+            "motivo",
+            "fecha_movimiento"
+        ],
+        "auth_required": true,
+        "allowed_roles": [
+            "*"
+        ]
+    },
+    "delete": {
+        "description": "Deletes an existing entry in 'movimientos_inventario' by its primary key",
+        "route": "/movimientos_inventario/$movimiento_id",
+        "method": "DELETE",
+        "sql": "DELETE FROM movimientos_inventario WHERE movimiento_id = $movimiento_id",
+        "auth_required": true,
+        "allowed_roles": [
+            "*"
+        ]
+    }
+}

@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Iniciar Sesión - Centro Médico</title>
+    <link rel="stylesheet" href="css/estilos.css">
+    <link rel="stylesheet" href="css/login.css">
+    <link rel="stylesheet" href="css/responsive.css">
+</head>
+<body>
+    <!-- NAVEGACIÓN -->
+    <nav class="navbar">
+        <div class="container navbar-content">
+            <div class="logo">
+                <h1>🏥 Centro Médico</h1>
+            </div>
+            <ul class="nav-menu">
+                <li><a href="index.html">Inicio</a></li>
+                <li><a href="especialidades.html">Especialidades</a></li>
+                <li><a href="nosotros.html">Nosotros</a></li>
+                <li><a href="login.html" class="active btn-login">Iniciar Sesión</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <!-- LOGIN CONTAINER -->
+    <section class="login-section">
+        <div class="login-container">
+            <div class="login-form-wrapper">
+                <h2>Iniciar Sesión</h2>
+                <p>Accede a tu cuenta del Centro Médico</p>
+
+                <!-- ALERTAS -->
+                <div id="alertaError" class="alert alert-error" style="display: none;"></div>
+                <div id="alertaExito" class="alert alert-success" style="display: none;"></div>
+
+                <!-- FORMULARIO LOGIN -->
+                <form id="loginForm" class="login-form">
+                    <div class="form-group">
+                        <label for="nombre_usuario">Nombre de Usuario</label>
+                        <input 
+                            type="text" 
+                            id="nombre_usuario" 
+                            name="nombre_usuario" 
+                            required
+                            placeholder="Ingresa tu usuario"
+                            autocomplete="username"
+                        >
+                    </div>
+
+                    <div class="form-group">
+                        <label for="contrasena">Contraseña</label>
+                        <input 
+                            type="password" 
+                            id="contrasena" 
+                            name="contrasena" 
+                            required
+                            placeholder="Ingresa tu contraseña"
+                            autocomplete="current-password"
+                        >
+                    </div>
+
+                    <div class="form-group checkbox">
+                        <input type="checkbox" id="recordar" name="recordar">
+                        <label for="recordar">Recuérdame en este navegador</label>
+                    </div>
+
+                    <button type="submit" class="btn btn-primary btn-block">Iniciar Sesión</button>
+                </form>
+
+                <!-- CREDENCIALES DE PRUEBA -->
+                <div class="demo-credentials">
+                    <h4>🔒 Credenciales de Prueba:</h4>
+                    <div class="credentials-grid">
+                        <div class="credential-item">
+                            <p><strong>👤 Paciente:</strong></p>
+                            <p>Usuario: <code>paciente1</code></p>
+                            <p>Contraseña: <code>123456</code></p>
+                            <button type="button" class="btn btn-secondary btn-sm" onclick="usarCredencialesPaciente()">Usar</button>
+                        </div>
+                        <div class="credential-item">
+                            <p><strong>👨‍⚕️ Empleado:</strong></p>
+                            <p>Usuario: <code>doctor1</code></p>
+                            <p>Contraseña: <code>123456</code></p>
+                            <button type="button" class="btn btn-secondary btn-sm" onclick="usarCredencialesEmpleado()">Usar</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- INFORMACIÓN LADO DERECHO -->
+            <div class="login-info">
+                <h3>¡Bienvenido de vuelta!</h3>
+                <p>Accede a tu portal personal para:</p>
+                <ul class="info-list">
+                    <li>✅ Agendar citas médicas</li>
+                    <li>✅ Ver tu expediente médico</li>
+                    <li>✅ Revisar tus citas programadas</li>
+                    <li>✅ Consultar información de especialistas</li>
+                    <li>✅ Gestionar tu perfil médico</li>
+                </ul>
+                <p class="small-text">Si eres empleado, accede a tu panel administrativo para gestionar citas, turnos e inventario.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- FOOTER -->
+    <footer class="footer">
+        <div class="container">
+            <p>&copy; 2025 Centro Médico. Todos los derechos reservados.</p>
+        </div>
+    </footer>
+
+    <!-- Scripts -->
+    <script src="js/mock-backend.js"></script>
+    <script src="js/login.js"></script>
+</body>
+</html>

@@ -1,0 +1,82 @@
+{
+    "getAll": {
+        "description": "Gets all entries from 'inventario'",
+        "route": "/inventario",
+        "method": "GET",
+        "sql": "SELECT * FROM inventario",
+        "auth_required": false,
+        "allowed_roles": [
+            "*"
+        ]
+    },
+    "getById": {
+        "description": "Gets an entry from 'inventario' by its primary key",
+        "route": "/inventario/$inventario_id",
+        "method": "GET",
+        "sql": "SELECT * FROM inventario WHERE inventario_id = $inventario_id",
+        "auth_required": false,
+        "allowed_roles": [
+            "*"
+        ]
+    },
+    "create": {
+        "description": "Creates a new entry in 'inventario'",
+        "route": "/inventario",
+        "method": "POST",
+        "sql": "INSERT INTO inventario (nombre_medicamento, codigo_medicamento, descripcion, categoria, cantidad_total, cantidad_minima, precio_unitario, proveedor, fecha_vencimiento, ubicacion_almacen, estado, fecha_ingreso, fecha_actualizacion) VALUES ($nombre_medicamento, $codigo_medicamento, $descripcion, $categoria, $cantidad_total, $cantidad_minima, $precio_unitario, $proveedor, $fecha_vencimiento, $ubicacion_almacen, $estado, $fecha_ingreso, $fecha_actualizacion)",
+        "request_body_params": [
+            "nombre_medicamento",
+            "codigo_medicamento",
+            "descripcion",
+            "categoria",
+            "cantidad_total",
+            "cantidad_minima",
+            "precio_unitario",
+            "proveedor",
+            "fecha_vencimiento",
+            "ubicacion_almacen",
+            "estado",
+            "fecha_ingreso",
+            "fecha_actualizacion"
+        ],
+        "auth_required": true,
+        "allowed_roles": [
+            "*"
+        ]
+    },
+    "update": {
+        "description": "Updates an existing entry in 'inventario' by its primary key",
+        "route": "/inventario/$inventario_id",
+        "method": "PUT",
+        "sql": "UPDATE inventario SET nombre_medicamento = $nombre_medicamento, codigo_medicamento = $codigo_medicamento, descripcion = $descripcion, categoria = $categoria, cantidad_total = $cantidad_total, cantidad_minima = $cantidad_minima, precio_unitario = $precio_unitario, proveedor = $proveedor, fecha_vencimiento = $fecha_vencimiento, ubicacion_almacen = $ubicacion_almacen, estado = $estado, fecha_ingreso = $fecha_ingreso, fecha_actualizacion = $fecha_actualizacion WHERE inventario_id = $inventario_id",
+        "request_body_params": [
+            "nombre_medicamento",
+            "codigo_medicamento",
+            "descripcion",
+            "categoria",
+            "cantidad_total",
+            "cantidad_minima",
+            "precio_unitario",
+            "proveedor",
+            "fecha_vencimiento",
+            "ubicacion_almacen",
+            "estado",
+            "fecha_ingreso",
+            "fecha_actualizacion"
+        ],
+        "auth_required": true,
+        "allowed_roles": [
+            "*"
+        ]
+    },
+    "delete": {
+        "description": "Deletes an existing entry in 'inventario' by its primary key",
+        "route": "/inventario/$inventario_id",
+        "method": "DELETE",
+        "sql": "DELETE FROM inventario WHERE inventario_id = $inventario_id",
+        "auth_required": true,
+        "allowed_roles": [
+            "*"
+        ]
+    }
+}

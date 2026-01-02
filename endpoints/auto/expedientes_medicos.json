@@ -1,0 +1,84 @@
+{
+    "getAll": {
+        "description": "Gets all entries from 'expedientes_medicos'",
+        "route": "/expedientes_medicos",
+        "method": "GET",
+        "sql": "SELECT * FROM expedientes_medicos",
+        "auth_required": false,
+        "allowed_roles": [
+            "*"
+        ]
+    },
+    "getById": {
+        "description": "Gets an entry from 'expedientes_medicos' by its primary key",
+        "route": "/expedientes_medicos/$expediente_id",
+        "method": "GET",
+        "sql": "SELECT * FROM expedientes_medicos WHERE expediente_id = $expediente_id",
+        "auth_required": false,
+        "allowed_roles": [
+            "*"
+        ]
+    },
+    "create": {
+        "description": "Creates a new entry in 'expedientes_medicos'",
+        "route": "/expedientes_medicos",
+        "method": "POST",
+        "sql": "INSERT INTO expedientes_medicos (paciente_id, peso_actual, altura, presion_arterial, frecuencia_cardiaca, temperatura, indice_masa_corporal, observaciones_medicas, diagnosticos_previos, medicamentos_actuales, operaciones_previas, vacunas, fecha_ultima_consulta, fecha_actualizacion) VALUES ($paciente_id, $peso_actual, $altura, $presion_arterial, $frecuencia_cardiaca, $temperatura, $indice_masa_corporal, $observaciones_medicas, $diagnosticos_previos, $medicamentos_actuales, $operaciones_previas, $vacunas, $fecha_ultima_consulta, $fecha_actualizacion)",
+        "request_body_params": [
+            "paciente_id",
+            "peso_actual",
+            "altura",
+            "presion_arterial",
+            "frecuencia_cardiaca",
+            "temperatura",
+            "indice_masa_corporal",
+            "observaciones_medicas",
+            "diagnosticos_previos",
+            "medicamentos_actuales",
+            "operaciones_previas",
+            "vacunas",
+            "fecha_ultima_consulta",
+            "fecha_actualizacion"
+        ],
+        "auth_required": true,
+        "allowed_roles": [
+            "*"
+        ]
+    },
+    "update": {
+        "description": "Updates an existing entry in 'expedientes_medicos' by its primary key",
+        "route": "/expedientes_medicos/$expediente_id",
+        "method": "PUT",
+        "sql": "UPDATE expedientes_medicos SET paciente_id = $paciente_id, peso_actual = $peso_actual, altura = $altura, presion_arterial = $presion_arterial, frecuencia_cardiaca = $frecuencia_cardiaca, temperatura = $temperatura, indice_masa_corporal = $indice_masa_corporal, observaciones_medicas = $observaciones_medicas, diagnosticos_previos = $diagnosticos_previos, medicamentos_actuales = $medicamentos_actuales, operaciones_previas = $operaciones_previas, vacunas = $vacunas, fecha_ultima_consulta = $fecha_ultima_consulta, fecha_actualizacion = $fecha_actualizacion WHERE expediente_id = $expediente_id",
+        "request_body_params": [
+            "paciente_id",
+            "peso_actual",
+            "altura",
+            "presion_arterial",
+            "frecuencia_cardiaca",
+            "temperatura",
+            "indice_masa_corporal",
+            "observaciones_medicas",
+            "diagnosticos_previos",
+            "medicamentos_actuales",
+            "operaciones_previas",
+            "vacunas",
+            "fecha_ultima_consulta",
+            "fecha_actualizacion"
+        ],
+        "auth_required": true,
+        "allowed_roles": [
+            "*"
+        ]
+    },
+    "delete": {
+        "description": "Deletes an existing entry in 'expedientes_medicos' by its primary key",
+        "route": "/expedientes_medicos/$expediente_id",
+        "method": "DELETE",
+        "sql": "DELETE FROM expedientes_medicos WHERE expediente_id = $expediente_id",
+        "auth_required": true,
+        "allowed_roles": [
+            "*"
+        ]
+    }
+}

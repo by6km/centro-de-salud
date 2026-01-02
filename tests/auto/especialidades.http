@@ -1,0 +1,147 @@
+
+### This is an auto-generated test suite, it needs to be completed with valid data.
+### These are not all tests you need, more of them should be created to evaluate the functional
+### requirements of your project. These tests only test the CRUD endpoints of the entity.
+### Silence is a DEAL research team project, more info about us in https://deal.us.es
+@BASE = http://127.0.0.1:8085/api/v1
+
+### Auxiliary query
+### Positive test
+### Test 00: Get all existing especialidades
+### This query is used in several of the below tests it should be executed first.
+# @name especialidades
+GET {{BASE}}/especialidades
+
+### Login a(n) usuarios and save the generated token 
+### This token is used in several of the below tests it should be executed second.
+# @name login
+POST {{BASE}}/login 
+Content-Type: application/json 
+
+{ 
+	"nombre_usuario": ###REPLACE###,
+	"contrasena": ###REPLACE###
+}
+
+###
+@token = {{login.response.body.sessionToken}}
+
+
+### TESTS BEGIN
+
+### Test 01: Get one existing especialidades by its id.
+### positive test 
+@espId = {{especialidades.response.body.0.especialidad_id}}
+GET {{BASE}}/especialidades/{{espId}} 
+Content-Type: application/json 
+
+
+### Test 02: Try get one existing especialidades by its nonexistent id.
+### negative test 
+GET {{BASE}}/especialidades/999999999
+Content-Type: application/json 
+
+
+### Test 03: Add a new especialidades successfully
+### Positive test 
+### We assume that the token has been aquired by the login request.
+# @name newespecialidades
+POST {{BASE}}/especialidades 
+Content-Type: application/json 
+Token: {{token}} 
+
+{
+	"nombre": ###REPLACE###,
+	"descripcion": ###REPLACE###,
+	"codigo": ###REPLACE###,
+	"activa": ###REPLACE###,
+	"fecha_creacion": ###REPLACE###
+} 
+
+### Check the created especialidades
+
+@newespecialidadesid = {{newespecialidades.response.body.lastId}}
+GET {{BASE}}/especialidades/{{newespecialidadesid}}
+Content-Type: application/json 
+
+### Test 04: Add a new especialidades without a session token
+### Negative test 
+POST {{BASE}}/especialidades 
+Content-Type: application/json 
+
+{ 
+	"nombre": ###REPLACE###,
+	"descripcion": ###REPLACE###,
+	"codigo": ###REPLACE###,
+	"activa": ###REPLACE###,
+	"fecha_creacion": ###REPLACE###
+}
+
+### Test 05: Modify an existing especialidades 
+### Positive test 
+@espId = {{especialidades.response.body.0.especialidad_id}} 
+PUT {{BASE}}/especialidades/{{espId}} 
+Content-Type: application/json 
+Token: {{token}} 
+
+{ 
+	"nombre": ###REPLACE###,
+	"descripcion": ###REPLACE###,
+	"codigo": ###REPLACE###,
+	"activa": ###REPLACE###,
+	"fecha_creacion": ###REPLACE###
+}
+
+### Check the modified especialidades
+
+GET {{BASE}}/especialidades/{{newespecialidadesid}}
+Content-Type: application/json 
+
+### Test 06: Try to modify an existing especialidades without a session token
+### Negative test
+@espId = {{especialidades.response.body.0.especialidad_id}}
+PUT {{BASE}}/especialidades/{{espId}}
+Content-Type: application/json
+
+{
+	"nombre": ###REPLACE###,
+	"descripcion": ###REPLACE###,
+	"codigo": ###REPLACE###,
+	"activa": ###REPLACE###,
+	"fecha_creacion": ###REPLACE###
+}
+
+### Test 07: Delete an existing especialidades
+### Positive test
+
+### Create a new especialidades, which we will delete
+# @name createdespToDelete
+POST {{BASE}}/especialidades
+Content-Type: application/json
+Token: {{token}}
+
+{
+	"nombre": ###REPLACE###,
+	"descripcion": ###REPLACE###,
+	"codigo": ###REPLACE###,
+	"activa": ###REPLACE###,
+	"fecha_creacion": ###REPLACE###
+}
+
+### Check the created especialidades
+@espdelId = {{createdespToDelete.response.body.lastId}}
+GET {{BASE}}/especialidades/{{espdelId}}
+Content-Type: application/json 
+
+### Delete the especialidades
+DELETE {{BASE}}/especialidades/{{espdelId}}
+Token: {{token}}
+
+### Check the deleted especialidades
+GET {{BASE}}/especialidades/{{espdelId}}
+Content-Type: application/json 
+
+### Test 08: Try to delete a especialidades without a session token
+### Negative test
+DELETE {{BASE}}/especialidades/{{espId}}
+

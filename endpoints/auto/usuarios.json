@@ -1,0 +1,70 @@
+{
+    "getAll": {
+        "description": "Gets all entries from 'usuarios'",
+        "route": "/usuarios",
+        "method": "GET",
+        "sql": "SELECT * FROM usuarios",
+        "auth_required": false,
+        "allowed_roles": [
+            "*"
+        ]
+    },
+    "getById": {
+        "description": "Gets an entry from 'usuarios' by its primary key",
+        "route": "/usuarios/$usuario_id",
+        "method": "GET",
+        "sql": "SELECT * FROM usuarios WHERE usuario_id = $usuario_id",
+        "auth_required": false,
+        "allowed_roles": [
+            "*"
+        ]
+    },
+    "create": {
+        "description": "Creates a new entry in 'usuarios'",
+        "route": "/usuarios",
+        "method": "POST",
+        "sql": "INSERT INTO usuarios (nombre_usuario, contrasena, email, tipo_usuario, activo, fecha_creacion, fecha_actualizacion) VALUES ($nombre_usuario, $contrasena, $email, $tipo_usuario, $activo, $fecha_creacion, $fecha_actualizacion)",
+        "request_body_params": [
+            "nombre_usuario",
+            "contrasena",
+            "email",
+            "tipo_usuario",
+            "activo",
+            "fecha_creacion",
+            "fecha_actualizacion"
+        ],
+        "auth_required": true,
+        "allowed_roles": [
+            "*"
+        ]
+    },
+    "update": {
+        "description": "Updates an existing entry in 'usuarios' by its primary key",
+        "route": "/usuarios/$usuario_id",
+        "method": "PUT",
+        "sql": "UPDATE usuarios SET nombre_usuario = $nombre_usuario, contrasena = $contrasena, email = $email, tipo_usuario = $tipo_usuario, activo = $activo, fecha_creacion = $fecha_creacion, fecha_actualizacion = $fecha_actualizacion WHERE usuario_id = $usuario_id",
+        "request_body_params": [
+            "nombre_usuario",
+            "contrasena",
+            "email",
+            "tipo_usuario",
+            "activo",
+            "fecha_creacion",
+            "fecha_actualizacion"
+        ],
+        "auth_required": true,
+        "allowed_roles": [
+            "*"
+        ]
+    },
+    "delete": {
+        "description": "Deletes an existing entry in 'usuarios' by its primary key",
+        "route": "/usuarios/$usuario_id",
+        "method": "DELETE",
+        "sql": "DELETE FROM usuarios WHERE usuario_id = $usuario_id",
+        "auth_required": true,
+        "allowed_roles": [
+            "*"
+        ]
+    }
+}

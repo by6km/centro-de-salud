@@ -1,0 +1,98 @@
+{
+    "getAll": {
+        "description": "Gets all entries from 'pacientes'",
+        "route": "/pacientes",
+        "method": "GET",
+        "sql": "SELECT * FROM pacientes",
+        "auth_required": false,
+        "allowed_roles": [
+            "*"
+        ]
+    },
+    "getById": {
+        "description": "Gets an entry from 'pacientes' by its primary key",
+        "route": "/pacientes/$paciente_id",
+        "method": "GET",
+        "sql": "SELECT * FROM pacientes WHERE paciente_id = $paciente_id",
+        "auth_required": false,
+        "allowed_roles": [
+            "*"
+        ]
+    },
+    "create": {
+        "description": "Creates a new entry in 'pacientes'",
+        "route": "/pacientes",
+        "method": "POST",
+        "sql": "INSERT INTO pacientes (usuario_id, nombre_completo, apellidos, numero_identidad, fecha_nacimiento, sexo, numero_telefono, tipo_sangre, alergias, enfermedades_cronicas, nombre_contacto_emergencia, telefono_contacto_emergencia, numero_seguro_medico, compania_seguro, direccion, ciudad, codigo_postal, provincia, activo, fecha_creacion, fecha_actualizacion) VALUES ($usuario_id, $nombre_completo, $apellidos, $numero_identidad, $fecha_nacimiento, $sexo, $numero_telefono, $tipo_sangre, $alergias, $enfermedades_cronicas, $nombre_contacto_emergencia, $telefono_contacto_emergencia, $numero_seguro_medico, $compania_seguro, $direccion, $ciudad, $codigo_postal, $provincia, $activo, $fecha_creacion, $fecha_actualizacion)",
+        "request_body_params": [
+            "usuario_id",
+            "nombre_completo",
+            "apellidos",
+            "numero_identidad",
+            "fecha_nacimiento",
+            "sexo",
+            "numero_telefono",
+            "tipo_sangre",
+            "alergias",
+            "enfermedades_cronicas",
+            "nombre_contacto_emergencia",
+            "telefono_contacto_emergencia",
+            "numero_seguro_medico",
+            "compania_seguro",
+            "direccion",
+            "ciudad",
+            "codigo_postal",
+            "provincia",
+            "activo",
+            "fecha_creacion",
+            "fecha_actualizacion"
+        ],
+        "auth_required": true,
+        "allowed_roles": [
+            "*"
+        ]
+    },
+    "update": {
+        "description": "Updates an existing entry in 'pacientes' by its primary key",
+        "route": "/pacientes/$paciente_id",
+        "method": "PUT",
+        "sql": "UPDATE pacientes SET usuario_id = $usuario_id, nombre_completo = $nombre_completo, apellidos = $apellidos, numero_identidad = $numero_identidad, fecha_nacimiento = $fecha_nacimiento, sexo = $sexo, numero_telefono = $numero_telefono, tipo_sangre = $tipo_sangre, alergias = $alergias, enfermedades_cronicas = $enfermedades_cronicas, nombre_contacto_emergencia = $nombre_contacto_emergencia, telefono_contacto_emergencia = $telefono_contacto_emergencia, numero_seguro_medico = $numero_seguro_medico, compania_seguro = $compania_seguro, direccion = $direccion, ciudad = $ciudad, codigo_postal = $codigo_postal, provincia = $provincia, activo = $activo, fecha_creacion = $fecha_creacion, fecha_actualizacion = $fecha_actualizacion WHERE paciente_id = $paciente_id",
+        "request_body_params": [
+            "usuario_id",
+            "nombre_completo",
+            "apellidos",
+            "numero_identidad",
+            "fecha_nacimiento",
+            "sexo",
+            "numero_telefono",
+            "tipo_sangre",
+            "alergias",
+            "enfermedades_cronicas",
+            "nombre_contacto_emergencia",
+            "telefono_contacto_emergencia",
+            "numero_seguro_medico",
+            "compania_seguro",
+            "direccion",
+            "ciudad",
+            "codigo_postal",
+            "provincia",
+            "activo",
+            "fecha_creacion",
+            "fecha_actualizacion"
+        ],
+        "auth_required": true,
+        "allowed_roles": [
+            "*"
+        ]
+    },
+    "delete": {
+        "description": "Deletes an existing entry in 'pacientes' by its primary key",
+        "route": "/pacientes/$paciente_id",
+        "method": "DELETE",
+        "sql": "DELETE FROM pacientes WHERE paciente_id = $paciente_id",
+        "auth_required": true,
+        "allowed_roles": [
+            "*"
+        ]
+    }
+}

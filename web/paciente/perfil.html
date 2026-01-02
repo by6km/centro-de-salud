@@ -1,0 +1,177 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mi Perfil - Centro Médico</title>
+    <link rel="stylesheet" href="../css/estilos.css">
+    <link rel="stylesheet" href="../css/dashboard.css">
+    <link rel="stylesheet" href="../css/responsive.css">
+</head>
+<body>
+    <!-- NAVEGACIÓN -->
+    <nav class="navbar">
+        <div class="container navbar-content">
+            <div class="logo">
+                <h1>🏥 Centro Médico</h1>
+            </div>
+            <ul class="nav-menu">
+                <li><a href="dashboard.html">Dashboard</a></li>
+                <li><a href="mis-citas.html">Mis Citas</a></li>
+                <li><a href="perfil.html" class="active">Mi Perfil</a></li>
+                <li><a href="#" onclick="cerrarSesion()" class="btn-logout">Cerrar Sesión</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <!-- MAIN CONTENT -->
+    <main class="container dashboard-container">
+        <section class="dashboard-header">
+            <h1>Mi Perfil 👤</h1>
+            <p>Gestiona tu información personal</p>
+        </section>
+
+        <!-- DATOS PERSONALES -->
+        <section class="card">
+            <div class="card__header">
+                <h3>Información Personal</h3>
+            </div>
+            <div class="card__body">
+                <form id="perfilForm" class="form-grid">
+                    <div class="form-group">
+                        <label for="nombre_completo">Nombre Completo</label>
+                        <input 
+                            type="text" 
+                            id="nombre_completo" 
+                            name="nombre_completo"
+                            value="Juan Pérez"
+                            readonly
+                        >
+                    </div>
+
+                    <div class="form-group">
+                        <label for="email">Email</label>
+                        <input 
+                            type="email" 
+                            id="email" 
+                            name="email"
+                            value="juan@example.com"
+                            readonly
+                        >
+                    </div>
+
+                    <div class="form-group">
+                        <label for="telefono">Teléfono</label>
+                        <input 
+                            type="tel" 
+                            id="telefono" 
+                            name="telefono"
+                            value="+34 123 456 789"
+                        >
+                    </div>
+
+                    <div class="form-group">
+                        <label for="fecha_nacimiento">Fecha de Nacimiento</label>
+                        <input 
+                            type="date" 
+                            id="fecha_nacimiento" 
+                            name="fecha_nacimiento"
+                            value="1990-05-15"
+                        >
+                    </div>
+
+                    <div class="form-group">
+                        <label for="direccion">Dirección</label>
+                        <textarea 
+                            id="direccion" 
+                            name="direccion"
+                            rows="3"
+                        >Calle Principal 123, Apartamento 4B</textarea>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="ciudad">Ciudad</label>
+                        <input 
+                            type="text" 
+                            id="ciudad" 
+                            name="ciudad"
+                            value="Sevilla"
+                        >
+                    </div>
+
+                    <div class="form-actions" style="grid-column: 1 / -1; margin-top: 20px;">
+                        <button type="submit" class="btn btn-primary">Guardar Cambios</button>
+                        <button type="button" class="btn btn-secondary" onclick="location.href='dashboard.html'">Cancelar</button>
+                    </div>
+                </form>
+            </div>
+        </section>
+
+        <!-- CAMBIAR CONTRASEÑA -->
+        <section class="card" style="margin-top: 30px;">
+            <div class="card__header">
+                <h3>Cambiar Contraseña</h3>
+            </div>
+            <div class="card__body">
+                <form id="cambiarContraForm" class="form-grid">
+                    <div class="form-group">
+                        <label for="contrasena_actual">Contraseña Actual</label>
+                        <input 
+                            type="password" 
+                            id="contrasena_actual" 
+                            name="contrasena_actual"
+                            required
+                        >
+                    </div>
+
+                    <div class="form-group">
+                        <label for="contrasena_nueva">Nueva Contraseña</label>
+                        <input 
+                            type="password" 
+                            id="contrasena_nueva" 
+                            name="contrasena_nueva"
+                            required
+                        >
+                    </div>
+
+                    <div class="form-group">
+                        <label for="contrasena_confirmar">Confirmar Contraseña</label>
+                        <input 
+                            type="password" 
+                            id="contrasena_confirmar" 
+                            name="contrasena_confirmar"
+                            required
+                        >
+                    </div>
+
+                    <div class="form-actions" style="grid-column: 1 / -1; margin-top: 20px;">
+                        <button type="submit" class="btn btn-warning">Cambiar Contraseña</button>
+                        <button type="reset" class="btn btn-secondary">Limpiar</button>
+                    </div>
+                </form>
+            </div>
+        </section>
+
+        <!-- ZONA DE PELIGRO -->
+        <section class="card" style="margin-top: 30px; border-color: #dc3545;">
+            <div class="card__header" style="background-color: #fee; border-bottom: 2px solid #dc3545;">
+                <h3 style="color: #dc3545;">⚠️ Zona de Peligro</h3>
+            </div>
+            <div class="card__body">
+                <p>Las siguientes acciones son irreversibles. Por favor, procede con cuidado.</p>
+                <button type="button" class="btn btn-danger" onclick="desactivarCuenta()">Desactivar Cuenta</button>
+            </div>
+        </section>
+    </main>
+
+    <!-- FOOTER -->
+    <footer class="footer">
+        <div class="container">
+            <p>&copy; 2025 Centro Médico. Todos los derechos reservados.</p>
+        </div>
+    </footer>
+
+    <script src="../js/mock-backend-v2.js"></script>
+    <script src="../js/perfil.js"></script>
+</body>
+</html>

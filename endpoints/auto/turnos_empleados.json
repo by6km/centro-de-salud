@@ -1,0 +1,72 @@
+{
+    "getAll": {
+        "description": "Gets all entries from 'turnos_empleados'",
+        "route": "/turnos_empleados",
+        "method": "GET",
+        "sql": "SELECT * FROM turnos_empleados",
+        "auth_required": false,
+        "allowed_roles": [
+            "*"
+        ]
+    },
+    "getById": {
+        "description": "Gets an entry from 'turnos_empleados' by its primary key",
+        "route": "/turnos_empleados/$turno_id",
+        "method": "GET",
+        "sql": "SELECT * FROM turnos_empleados WHERE turno_id = $turno_id",
+        "auth_required": false,
+        "allowed_roles": [
+            "*"
+        ]
+    },
+    "create": {
+        "description": "Creates a new entry in 'turnos_empleados'",
+        "route": "/turnos_empleados",
+        "method": "POST",
+        "sql": "INSERT INTO turnos_empleados (empleado_id, fecha_turno, hora_inicio, hora_fin, tipo_turno, confirmado, notas, fecha_creacion) VALUES ($empleado_id, $fecha_turno, $hora_inicio, $hora_fin, $tipo_turno, $confirmado, $notas, $fecha_creacion)",
+        "request_body_params": [
+            "empleado_id",
+            "fecha_turno",
+            "hora_inicio",
+            "hora_fin",
+            "tipo_turno",
+            "confirmado",
+            "notas",
+            "fecha_creacion"
+        ],
+        "auth_required": true,
+        "allowed_roles": [
+            "*"
+        ]
+    },
+    "update": {
+        "description": "Updates an existing entry in 'turnos_empleados' by its primary key",
+        "route": "/turnos_empleados/$turno_id",
+        "method": "PUT",
+        "sql": "UPDATE turnos_empleados SET empleado_id = $empleado_id, fecha_turno = $fecha_turno, hora_inicio = $hora_inicio, hora_fin = $hora_fin, tipo_turno = $tipo_turno, confirmado = $confirmado, notas = $notas, fecha_creacion = $fecha_creacion WHERE turno_id = $turno_id",
+        "request_body_params": [
+            "empleado_id",
+            "fecha_turno",
+            "hora_inicio",
+            "hora_fin",
+            "tipo_turno",
+            "confirmado",
+            "notas",
+            "fecha_creacion"
+        ],
+        "auth_required": true,
+        "allowed_roles": [
+            "*"
+        ]
+    },
+    "delete": {
+        "description": "Deletes an existing entry in 'turnos_empleados' by its primary key",
+        "route": "/turnos_empleados/$turno_id",
+        "method": "DELETE",
+        "sql": "DELETE FROM turnos_empleados WHERE turno_id = $turno_id",
+        "auth_required": true,
+        "allowed_roles": [
+            "*"
+        ]
+    }
+}

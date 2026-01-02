@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mis Citas - Centro Médico</title>
+    <link rel="stylesheet" href="../css/estilos.css">
+    <link rel="stylesheet" href="../css/dashboard.css">
+    <link rel="stylesheet" href="../css/responsive.css">
+</head>
+<body>
+    <!-- NAVEGACIÓN -->
+    <nav class="navbar">
+        <div class="container navbar-content">
+            <div class="logo">
+                <h1>🏥 Centro Médico</h1>
+            </div>
+            <ul class="nav-menu">
+                <li><a href="dashboard.html">Dashboard</a></li>
+                <li><a href="mis-citas.html" class="active">Mis Citas</a></li>
+                <li><a href="perfil.html">Mi Perfil</a></li>
+                <li><a href="#" onclick="cerrarSesion()" class="btn-logout">Cerrar Sesión</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <!-- MAIN CONTENT -->
+    <main class="container dashboard-container">
+        <section class="dashboard-header">
+            <h1>Mis Citas 📋</h1>
+            <p>Historial completo de tus citas médicas</p>
+            <a href="pedir-cita.html" class="btn btn-primary">Agendar Nueva Cita</a>
+        </section>
+
+        <!-- TABLA DE CITAS -->
+        <section class="card">
+            <div class="card__header">
+                <h3>Tus Citas Programadas</h3>
+            </div>
+            <div class="card__body">
+                <table class="citas-table">
+                    <thead>
+                        <tr>
+                            <th>Fecha</th>
+                            <th>Hora</th>
+                            <th>Especialidad</th>
+                            <th>Médico</th>
+                            <th>Estado</th>
+                            <th>Acciones</th>
+                        </tr>
+                    </thead>
+                    <tbody id="citasTableBody">
+                        <tr>
+                            <td>10/01/2026</td>
+                            <td>10:00 AM</td>
+                            <td>Cardiología</td>
+                            <td>Dr. Carlos López</td>
+                            <td><span class="badge badge-success">Programada</span></td>
+                            <td>
+                                <button class="btn btn-sm btn-warning">Reprogramar</button>
+                                <button class="btn btn-sm btn-danger">Cancelar</button>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>05/01/2026</td>
+                            <td>2:30 PM</td>
+                            <td>Neurología</td>
+                            <td>Dra. María Rodríguez</td>
+                            <td><span class="badge badge-primary">Completada</span></td>
+                            <td>
+                                <button class="btn btn-sm btn-info">Ver Resultado</button>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>15/12/2025</td>
+                            <td>9:00 AM</td>
+                            <td>Pediatría</td>
+                            <td>Dr. Juan García</td>
+                            <td><span class="badge badge-primary">Completada</span></td>
+                            <td>
+                                <button class="btn btn-sm btn-info">Ver Resultado</button>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </section>
+    </main>
+
+    <!-- FOOTER -->
+    <footer class="footer">
+        <div class="container">
+            <p>&copy; 2025 Centro Médico. Todos los derechos reservados.</p>
+        </div>
+    </footer>
+
+    <script src="../js/mock-backend.js"></script>
+    <script src="../js/mis-citas.js"></script>
+</body>
+</html>

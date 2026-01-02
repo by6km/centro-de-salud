@@ -1,0 +1,212 @@
+
+### This is an auto-generated test suite, it needs to be completed with valid data.
+### These are not all tests you need, more of them should be created to evaluate the functional
+### requirements of your project. These tests only test the CRUD endpoints of the entity.
+### Silence is a DEAL research team project, more info about us in https://deal.us.es
+@BASE = http://127.0.0.1:8085/api/v1
+
+### Auxiliary query
+### Positive test
+### Test 00: Get all existing empleados
+### This query is used in several of the below tests it should be executed first.
+# @name empleados
+GET {{BASE}}/empleados
+
+### Login a(n) usuarios and save the generated token 
+### This token is used in several of the below tests it should be executed second.
+# @name login
+POST {{BASE}}/login 
+Content-Type: application/json 
+
+{ 
+	"nombre_usuario": ###REPLACE###,
+	"contrasena": ###REPLACE###
+}
+
+###
+@token = {{login.response.body.sessionToken}}
+
+
+### TESTS BEGIN
+
+### Test 01: Get one existing empleados by its id.
+### positive test 
+@empId = {{empleados.response.body.0.empleado_id}}
+GET {{BASE}}/empleados/{{empId}} 
+Content-Type: application/json 
+
+
+### Test 02: Try get one existing empleados by its nonexistent id.
+### negative test 
+GET {{BASE}}/empleados/999999999
+Content-Type: application/json 
+
+
+### Test 03: Add a new empleados successfully
+### Positive test 
+### We assume that the token has been aquired by the login request.
+# @name newempleados
+POST {{BASE}}/empleados 
+Content-Type: application/json 
+Token: {{token}} 
+
+{
+	"usuario_id": ###REPLACE###,
+	"nombre_completo": ###REPLACE###,
+	"apellidos": ###REPLACE###,
+	"numero_identidad": ###REPLACE###,
+	"especializacion": ###REPLACE###,
+	"especialidad_id": ###REPLACE###,
+	"numero_licencia_medica": ###REPLACE###,
+	"numero_telefono": ###REPLACE###,
+	"email_laboral": ###REPLACE###,
+	"fecha_contratacion": ###REPLACE###,
+	"estado": ###REPLACE###,
+	"horarios_trabajo": ###REPLACE###,
+	"direccion": ###REPLACE###,
+	"ciudad": ###REPLACE###,
+	"codigo_postal": ###REPLACE###,
+	"provincia": ###REPLACE###,
+	"fecha_creacion": ###REPLACE###,
+	"fecha_actualizacion": ###REPLACE###
+} 
+
+### Check the created empleados
+
+@newempleadosid = {{newempleados.response.body.lastId}}
+GET {{BASE}}/empleados/{{newempleadosid}}
+Content-Type: application/json 
+
+### Test 04: Add a new empleados without a session token
+### Negative test 
+POST {{BASE}}/empleados 
+Content-Type: application/json 
+
+{ 
+	"usuario_id": ###REPLACE###,
+	"nombre_completo": ###REPLACE###,
+	"apellidos": ###REPLACE###,
+	"numero_identidad": ###REPLACE###,
+	"especializacion": ###REPLACE###,
+	"especialidad_id": ###REPLACE###,
+	"numero_licencia_medica": ###REPLACE###,
+	"numero_telefono": ###REPLACE###,
+	"email_laboral": ###REPLACE###,
+	"fecha_contratacion": ###REPLACE###,
+	"estado": ###REPLACE###,
+	"horarios_trabajo": ###REPLACE###,
+	"direccion": ###REPLACE###,
+	"ciudad": ###REPLACE###,
+	"codigo_postal": ###REPLACE###,
+	"provincia": ###REPLACE###,
+	"fecha_creacion": ###REPLACE###,
+	"fecha_actualizacion": ###REPLACE###
+}
+
+### Test 05: Modify an existing empleados 
+### Positive test 
+@empId = {{empleados.response.body.0.empleado_id}} 
+PUT {{BASE}}/empleados/{{empId}} 
+Content-Type: application/json 
+Token: {{token}} 
+
+{ 
+	"usuario_id": ###REPLACE###,
+	"nombre_completo": ###REPLACE###,
+	"apellidos": ###REPLACE###,
+	"numero_identidad": ###REPLACE###,
+	"especializacion": ###REPLACE###,
+	"especialidad_id": ###REPLACE###,
+	"numero_licencia_medica": ###REPLACE###,
+	"numero_telefono": ###REPLACE###,
+	"email_laboral": ###REPLACE###,
+	"fecha_contratacion": ###REPLACE###,
+	"estado": ###REPLACE###,
+	"horarios_trabajo": ###REPLACE###,
+	"direccion": ###REPLACE###,
+	"ciudad": ###REPLACE###,
+	"codigo_postal": ###REPLACE###,
+	"provincia": ###REPLACE###,
+	"fecha_creacion": ###REPLACE###,
+	"fecha_actualizacion": ###REPLACE###
+}
+
+### Check the modified empleados
+
+GET {{BASE}}/empleados/{{newempleadosid}}
+Content-Type: application/json 
+
+### Test 06: Try to modify an existing empleados without a session token
+### Negative test
+@empId = {{empleados.response.body.0.empleado_id}}
+PUT {{BASE}}/empleados/{{empId}}
+Content-Type: application/json
+
+{
+	"usuario_id": ###REPLACE###,
+	"nombre_completo": ###REPLACE###,
+	"apellidos": ###REPLACE###,
+	"numero_identidad": ###REPLACE###,
+	"especializacion": ###REPLACE###,
+	"especialidad_id": ###REPLACE###,
+	"numero_licencia_medica": ###REPLACE###,
+	"numero_telefono": ###REPLACE###,
+	"email_laboral": ###REPLACE###,
+	"fecha_contratacion": ###REPLACE###,
+	"estado": ###REPLACE###,
+	"horarios_trabajo": ###REPLACE###,
+	"direccion": ###REPLACE###,
+	"ciudad": ###REPLACE###,
+	"codigo_postal": ###REPLACE###,
+	"provincia": ###REPLACE###,
+	"fecha_creacion": ###REPLACE###,
+	"fecha_actualizacion": ###REPLACE###
+}
+
+### Test 07: Delete an existing empleados
+### Positive test
+
+### Create a new empleados, which we will delete
+# @name createdempToDelete
+POST {{BASE}}/empleados
+Content-Type: application/json
+Token: {{token}}
+
+{
+	"usuario_id": ###REPLACE###,
+	"nombre_completo": ###REPLACE###,
+	"apellidos": ###REPLACE###,
+	"numero_identidad": ###REPLACE###,
+	"especializacion": ###REPLACE###,
+	"especialidad_id": ###REPLACE###,
+	"numero_licencia_medica": ###REPLACE###,
+	"numero_telefono": ###REPLACE###,
+	"email_laboral": ###REPLACE###,
+	"fecha_contratacion": ###REPLACE###,
+	"estado": ###REPLACE###,
+	"horarios_trabajo": ###REPLACE###,
+	"direccion": ###REPLACE###,
+	"ciudad": ###REPLACE###,
+	"codigo_postal": ###REPLACE###,
+	"provincia": ###REPLACE###,
+	"fecha_creacion": ###REPLACE###,
+	"fecha_actualizacion": ###REPLACE###
+}
+
+### Check the created empleados
+@empdelId = {{createdempToDelete.response.body.lastId}}
+GET {{BASE}}/empleados/{{empdelId}}
+Content-Type: application/json 
+
+### Delete the empleados
+DELETE {{BASE}}/empleados/{{empdelId}}
+Token: {{token}}
+
+### Check the deleted empleados
+GET {{BASE}}/empleados/{{empdelId}}
+Content-Type: application/json 
+
+### Test 08: Try to delete a empleados without a session token
+### Negative test
+DELETE {{BASE}}/empleados/{{empId}}
+

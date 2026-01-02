@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Agendar Cita - Centro Médico</title>
+    <link rel="stylesheet" href="../css/estilos.css">
+    <link rel="stylesheet" href="../css/dashboard.css">
+    <link rel="stylesheet" href="../css/dashboard-styles.css">
+    <link rel="stylesheet" href="../css/responsive.css">
+</head>
+<body>
+    <!-- NAVEGACIÓN -->
+    <nav class="navbar">
+        <div class="container navbar-content">
+            <div class="logo">
+                <h1>🏥 Centro Médico</h1>
+            </div>
+            <ul class="nav-menu">
+                <li><a href="dashboard.html">Dashboard</a></li>
+                <li><a href="mis-citas.html">Mis Citas</a></li>
+                <li><a href="perfil.html">Mi Perfil</a></li>
+                <li><a href="#" onclick="cerrarSesion()" class="btn-logout">Cerrar Sesión</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <!-- MAIN CONTENT -->
+    <main class="container dashboard-container">
+        <section class="dashboard-header">
+            <h1>Agendar Nueva Cita 📅</h1>
+            <p>Selecciona especialidad, médico y fecha</p>
+        </section>
+
+        <!-- FORMULARIO DE CITA -->
+        <section class="card">
+            <div class="card__header">
+                <h3>Formulario de Cita</h3>
+            </div>
+            <div class="card__body">
+                <form id="citaForm" class="form-grid">
+                    <!-- ESPECIALIDAD -->
+                    <div class="form-group">
+                        <label for="especialidad">Especialidad *</label>
+                        <select id="especialidad" name="especialidad" required onchange="cargarMedicos()">
+                            <option value="">-- Selecciona una especialidad --</option>
+                        </select>
+                        <small id="especialidadError" style="color: #dc3545; display: none;">Cargando especialidades...</small>
+                    </div>
+
+                    <!-- MÉDICO -->
+                    <div class="form-group">
+                        <label for="medico">Médico *</label>
+                        <select id="medico" name="medico" required>
+                            <option value="">-- Selecciona un médico --</option>
+                        </select>
+                        <small id="medicoError" style="color: #dc3545; display: none;">Selecciona una especialidad primero</small>
+                    </div>
+
+                    <!-- FECHA -->
+                    <div class="form-group">
+                        <label for="fecha">Fecha de la Cita *</label>
+                        <input type="date" id="fecha" name="fecha" required>
+                        <small id="fechaError" style="color: #666; font-size: 0.85rem;">
+                            Selecciona una fecha disponible
+                        </small>
+                    </div>
+
+                    <!-- HORA -->
+                    <div class="form-group">
+                        <label for="hora">Hora de la Cita *</label>
+                        <select id="hora" name="hora" required>
+                            <option value="">-- Selecciona una hora --</option>
+                            <option value="09:00">09:00 AM</option>
+                            <option value="09:30">09:30 AM</option>
+                            <option value="10:00">10:00 AM</option>
+                            <option value="10:30">10:30 AM</option>
+                            <option value="11:00">11:00 AM</option>
+                            <option value="11:30">11:30 AM</option>
+                            <option value="14:00">02:00 PM</option>
+                            <option value="14:30">02:30 PM</option>
+                            <option value="15:00">03:00 PM</option>
+                            <option value="15:30">03:30 PM</option>
+                            <option value="16:00">04:00 PM</option>
+                            <option value="16:30">04:30 PM</option>
+                            <option value="17:00">05:00 PM</option>
+                        </select>
+                    </div>
+
+                    <!-- MOTIVO -->
+                    <div class="form-group" style="grid-column: 1 / -1;">
+                        <label for="motivo">Motivo de la Cita</label>
+                        <textarea id="motivo" name="motivo" rows="4" placeholder="Describe tu motivo de consulta..."></textarea>
+                    </div>
+
+                    <!-- BOTONES -->
+                    <div class="form-actions" style="grid-column: 1 / -1; margin-top: 20px;">
+                        <button type="submit" class="btn btn-primary">Agendar Cita</button>
+                        <button type="reset" class="btn btn-secondary">Limpiar</button>
+                        <a href="dashboard.html" class="btn btn-secondary" style="text-decoration: none; text-align: center;">Cancelar</a>
+                    </div>
+                </form>
+            </div>
+        </section>
+
+        <!-- INFORMACIÓN ÚTIL -->
+        <section class="card" style="margin-top: 2rem;">
+            <div class="card__header">
+                <h3>ℹ️ Información Importante</h3>
+            </div>
+            <div class="card__body">
+                <ul style="padding-left: 1.5rem;">
+                    <li>Asegúrate de llegar 10 minutos antes de tu cita</li>
+                    <li>Trae tu cédula de identidad</li>
+                    <li>Si necesitas cancelar, hazlo con 24 horas de anticipación</li>
+                    <li>Recibirás un recordatorio por correo electrónico</li>
+                </ul>
+            </div>
+        </section>
+    </main>
+
+    <!-- FOOTER -->
+    <footer class="footer">
+        <div class="container">
+            <p>&copy; 2025 Centro Médico. Todos los derechos reservados.</p>
+        </div>
+    </footer>
+
+    <script src="../js/mock-backend.js"></script>
+    <script src="../js/pedir-cita.js"></script>
+</body>
+</html>

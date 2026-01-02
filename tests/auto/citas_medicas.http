@@ -1,0 +1,182 @@
+
+### This is an auto-generated test suite, it needs to be completed with valid data.
+### These are not all tests you need, more of them should be created to evaluate the functional
+### requirements of your project. These tests only test the CRUD endpoints of the entity.
+### Silence is a DEAL research team project, more info about us in https://deal.us.es
+@BASE = http://127.0.0.1:8085/api/v1
+
+### Auxiliary query
+### Positive test
+### Test 00: Get all existing citas_medicas
+### This query is used in several of the below tests it should be executed first.
+# @name citas_medicas
+GET {{BASE}}/citas_medicas
+
+### Login a(n) usuarios and save the generated token 
+### This token is used in several of the below tests it should be executed second.
+# @name login
+POST {{BASE}}/login 
+Content-Type: application/json 
+
+{ 
+	"nombre_usuario": ###REPLACE###,
+	"contrasena": ###REPLACE###
+}
+
+###
+@token = {{login.response.body.sessionToken}}
+
+
+### TESTS BEGIN
+
+### Test 01: Get one existing citas_medicas by its id.
+### positive test 
+@citId = {{citas_medicas.response.body.0.cita_id}}
+GET {{BASE}}/citas_medicas/{{citId}} 
+Content-Type: application/json 
+
+
+### Test 02: Try get one existing citas_medicas by its nonexistent id.
+### negative test 
+GET {{BASE}}/citas_medicas/999999999
+Content-Type: application/json 
+
+
+### Test 03: Add a new citas_medicas successfully
+### Positive test 
+### We assume that the token has been aquired by the login request.
+# @name newcitas_medicas
+POST {{BASE}}/citas_medicas 
+Content-Type: application/json 
+Token: {{token}} 
+
+{
+	"paciente_id": ###REPLACE###,
+	"empleado_id": ###REPLACE###,
+	"especialidad_id": ###REPLACE###,
+	"fecha_cita": ###REPLACE###,
+	"hora_cita": ###REPLACE###,
+	"motivo_consulta": ###REPLACE###,
+	"estado": ###REPLACE###,
+	"notas_medicas": ###REPLACE###,
+	"medicamentos_recetados": ###REPLACE###,
+	"proxima_cita_recomendada": ###REPLACE###,
+	"fecha_creacion": ###REPLACE###,
+	"fecha_actualizacion": ###REPLACE###
+} 
+
+### Check the created citas_medicas
+
+@newcitas_medicasid = {{newcitas_medicas.response.body.lastId}}
+GET {{BASE}}/citas_medicas/{{newcitas_medicasid}}
+Content-Type: application/json 
+
+### Test 04: Add a new citas_medicas without a session token
+### Negative test 
+POST {{BASE}}/citas_medicas 
+Content-Type: application/json 
+
+{ 
+	"paciente_id": ###REPLACE###,
+	"empleado_id": ###REPLACE###,
+	"especialidad_id": ###REPLACE###,
+	"fecha_cita": ###REPLACE###,
+	"hora_cita": ###REPLACE###,
+	"motivo_consulta": ###REPLACE###,
+	"estado": ###REPLACE###,
+	"notas_medicas": ###REPLACE###,
+	"medicamentos_recetados": ###REPLACE###,
+	"proxima_cita_recomendada": ###REPLACE###,
+	"fecha_creacion": ###REPLACE###,
+	"fecha_actualizacion": ###REPLACE###
+}
+
+### Test 05: Modify an existing citas_medicas 
+### Positive test 
+@citId = {{citas_medicas.response.body.0.cita_id}} 
+PUT {{BASE}}/citas_medicas/{{citId}} 
+Content-Type: application/json 
+Token: {{token}} 
+
+{ 
+	"paciente_id": ###REPLACE###,
+	"empleado_id": ###REPLACE###,
+	"especialidad_id": ###REPLACE###,
+	"fecha_cita": ###REPLACE###,
+	"hora_cita": ###REPLACE###,
+	"motivo_consulta": ###REPLACE###,
+	"estado": ###REPLACE###,
+	"notas_medicas": ###REPLACE###,
+	"medicamentos_recetados": ###REPLACE###,
+	"proxima_cita_recomendada": ###REPLACE###,
+	"fecha_creacion": ###REPLACE###,
+	"fecha_actualizacion": ###REPLACE###
+}
+
+### Check the modified citas_medicas
+
+GET {{BASE}}/citas_medicas/{{newcitas_medicasid}}
+Content-Type: application/json 
+
+### Test 06: Try to modify an existing citas_medicas without a session token
+### Negative test
+@citId = {{citas_medicas.response.body.0.cita_id}}
+PUT {{BASE}}/citas_medicas/{{citId}}
+Content-Type: application/json
+
+{
+	"paciente_id": ###REPLACE###,
+	"empleado_id": ###REPLACE###,
+	"especialidad_id": ###REPLACE###,
+	"fecha_cita": ###REPLACE###,
+	"hora_cita": ###REPLACE###,
+	"motivo_consulta": ###REPLACE###,
+	"estado": ###REPLACE###,
+	"notas_medicas": ###REPLACE###,
+	"medicamentos_recetados": ###REPLACE###,
+	"proxima_cita_recomendada": ###REPLACE###,
+	"fecha_creacion": ###REPLACE###,
+	"fecha_actualizacion": ###REPLACE###
+}
+
+### Test 07: Delete an existing citas_medicas
+### Positive test
+
+### Create a new citas_medicas, which we will delete
+# @name createdcitToDelete
+POST {{BASE}}/citas_medicas
+Content-Type: application/json
+Token: {{token}}
+
+{
+	"paciente_id": ###REPLACE###,
+	"empleado_id": ###REPLACE###,
+	"especialidad_id": ###REPLACE###,
+	"fecha_cita": ###REPLACE###,
+	"hora_cita": ###REPLACE###,
+	"motivo_consulta": ###REPLACE###,
+	"estado": ###REPLACE###,
+	"notas_medicas": ###REPLACE###,
+	"medicamentos_recetados": ###REPLACE###,
+	"proxima_cita_recomendada": ###REPLACE###,
+	"fecha_creacion": ###REPLACE###,
+	"fecha_actualizacion": ###REPLACE###
+}
+
+### Check the created citas_medicas
+@citdelId = {{createdcitToDelete.response.body.lastId}}
+GET {{BASE}}/citas_medicas/{{citdelId}}
+Content-Type: application/json 
+
+### Delete the citas_medicas
+DELETE {{BASE}}/citas_medicas/{{citdelId}}
+Token: {{token}}
+
+### Check the deleted citas_medicas
+GET {{BASE}}/citas_medicas/{{citdelId}}
+Content-Type: application/json 
+
+### Test 08: Try to delete a citas_medicas without a session token
+### Negative test
+DELETE {{BASE}}/citas_medicas/{{citId}}
+

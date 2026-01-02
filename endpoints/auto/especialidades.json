@@ -1,0 +1,66 @@
+{
+    "getAll": {
+        "description": "Gets all entries from 'especialidades'",
+        "route": "/especialidades",
+        "method": "GET",
+        "sql": "SELECT * FROM especialidades",
+        "auth_required": false,
+        "allowed_roles": [
+            "*"
+        ]
+    },
+    "getById": {
+        "description": "Gets an entry from 'especialidades' by its primary key",
+        "route": "/especialidades/$especialidad_id",
+        "method": "GET",
+        "sql": "SELECT * FROM especialidades WHERE especialidad_id = $especialidad_id",
+        "auth_required": false,
+        "allowed_roles": [
+            "*"
+        ]
+    },
+    "create": {
+        "description": "Creates a new entry in 'especialidades'",
+        "route": "/especialidades",
+        "method": "POST",
+        "sql": "INSERT INTO especialidades (nombre, descripcion, codigo, activa, fecha_creacion) VALUES ($nombre, $descripcion, $codigo, $activa, $fecha_creacion)",
+        "request_body_params": [
+            "nombre",
+            "descripcion",
+            "codigo",
+            "activa",
+            "fecha_creacion"
+        ],
+        "auth_required": true,
+        "allowed_roles": [
+            "*"
+        ]
+    },
+    "update": {
+        "description": "Updates an existing entry in 'especialidades' by its primary key",
+        "route": "/especialidades/$especialidad_id",
+        "method": "PUT",
+        "sql": "UPDATE especialidades SET nombre = $nombre, descripcion = $descripcion, codigo = $codigo, activa = $activa, fecha_creacion = $fecha_creacion WHERE especialidad_id = $especialidad_id",
+        "request_body_params": [
+            "nombre",
+            "descripcion",
+            "codigo",
+            "activa",
+            "fecha_creacion"
+        ],
+        "auth_required": true,
+        "allowed_roles": [
+            "*"
+        ]
+    },
+    "delete": {
+        "description": "Deletes an existing entry in 'especialidades' by its primary key",
+        "route": "/especialidades/$especialidad_id",
+        "method": "DELETE",
+        "sql": "DELETE FROM especialidades WHERE especialidad_id = $especialidad_id",
+        "auth_required": true,
+        "allowed_roles": [
+            "*"
+        ]
+    }
+}

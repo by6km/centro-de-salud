@@ -1,0 +1,157 @@
+
+### This is an auto-generated test suite, it needs to be completed with valid data.
+### These are not all tests you need, more of them should be created to evaluate the functional
+### requirements of your project. These tests only test the CRUD endpoints of the entity.
+### Silence is a DEAL research team project, more info about us in https://deal.us.es
+@BASE = http://127.0.0.1:8085/api/v1
+
+### Auxiliary query
+### Positive test
+### Test 00: Get all existing movimientos_inventario
+### This query is used in several of the below tests it should be executed first.
+# @name movimientos_inventario
+GET {{BASE}}/movimientos_inventario
+
+### Login a(n) usuarios and save the generated token 
+### This token is used in several of the below tests it should be executed second.
+# @name login
+POST {{BASE}}/login 
+Content-Type: application/json 
+
+{ 
+	"nombre_usuario": ###REPLACE###,
+	"contrasena": ###REPLACE###
+}
+
+###
+@token = {{login.response.body.sessionToken}}
+
+
+### TESTS BEGIN
+
+### Test 01: Get one existing movimientos_inventario by its id.
+### positive test 
+@movId = {{movimientos_inventario.response.body.0.movimiento_id}}
+GET {{BASE}}/movimientos_inventario/{{movId}} 
+Content-Type: application/json 
+
+
+### Test 02: Try get one existing movimientos_inventario by its nonexistent id.
+### negative test 
+GET {{BASE}}/movimientos_inventario/999999999
+Content-Type: application/json 
+
+
+### Test 03: Add a new movimientos_inventario successfully
+### Positive test 
+### We assume that the token has been aquired by the login request.
+# @name newmovimientos_inventario
+POST {{BASE}}/movimientos_inventario 
+Content-Type: application/json 
+Token: {{token}} 
+
+{
+	"inventario_id": ###REPLACE###,
+	"cita_id": ###REPLACE###,
+	"empleado_id": ###REPLACE###,
+	"tipo_movimiento": ###REPLACE###,
+	"cantidad": ###REPLACE###,
+	"motivo": ###REPLACE###,
+	"fecha_movimiento": ###REPLACE###
+} 
+
+### Check the created movimientos_inventario
+
+@newmovimientos_inventarioid = {{newmovimientos_inventario.response.body.lastId}}
+GET {{BASE}}/movimientos_inventario/{{newmovimientos_inventarioid}}
+Content-Type: application/json 
+
+### Test 04: Add a new movimientos_inventario without a session token
+### Negative test 
+POST {{BASE}}/movimientos_inventario 
+Content-Type: application/json 
+
+{ 
+	"inventario_id": ###REPLACE###,
+	"cita_id": ###REPLACE###,
+	"empleado_id": ###REPLACE###,
+	"tipo_movimiento": ###REPLACE###,
+	"cantidad": ###REPLACE###,
+	"motivo": ###REPLACE###,
+	"fecha_movimiento": ###REPLACE###
+}
+
+### Test 05: Modify an existing movimientos_inventario 
+### Positive test 
+@movId = {{movimientos_inventario.response.body.0.movimiento_id}} 
+PUT {{BASE}}/movimientos_inventario/{{movId}} 
+Content-Type: application/json 
+Token: {{token}} 
+
+{ 
+	"inventario_id": ###REPLACE###,
+	"cita_id": ###REPLACE###,
+	"empleado_id": ###REPLACE###,
+	"tipo_movimiento": ###REPLACE###,
+	"cantidad": ###REPLACE###,
+	"motivo": ###REPLACE###,
+	"fecha_movimiento": ###REPLACE###
+}
+
+### Check the modified movimientos_inventario
+
+GET {{BASE}}/movimientos_inventario/{{newmovimientos_inventarioid}}
+Content-Type: application/json 
+
+### Test 06: Try to modify an existing movimientos_inventario without a session token
+### Negative test
+@movId = {{movimientos_inventario.response.body.0.movimiento_id}}
+PUT {{BASE}}/movimientos_inventario/{{movId}}
+Content-Type: application/json
+
+{
+	"inventario_id": ###REPLACE###,
+	"cita_id": ###REPLACE###,
+	"empleado_id": ###REPLACE###,
+	"tipo_movimiento": ###REPLACE###,
+	"cantidad": ###REPLACE###,
+	"motivo": ###REPLACE###,
+	"fecha_movimiento": ###REPLACE###
+}
+
+### Test 07: Delete an existing movimientos_inventario
+### Positive test
+
+### Create a new movimientos_inventario, which we will delete
+# @name createdmovToDelete
+POST {{BASE}}/movimientos_inventario
+Content-Type: application/json
+Token: {{token}}
+
+{
+	"inventario_id": ###REPLACE###,
+	"cita_id": ###REPLACE###,
+	"empleado_id": ###REPLACE###,
+	"tipo_movimiento": ###REPLACE###,
+	"cantidad": ###REPLACE###,
+	"motivo": ###REPLACE###,
+	"fecha_movimiento": ###REPLACE###
+}
+
+### Check the created movimientos_inventario
+@movdelId = {{createdmovToDelete.response.body.lastId}}
+GET {{BASE}}/movimientos_inventario/{{movdelId}}
+Content-Type: application/json 
+
+### Delete the movimientos_inventario
+DELETE {{BASE}}/movimientos_inventario/{{movdelId}}
+Token: {{token}}
+
+### Check the deleted movimientos_inventario
+GET {{BASE}}/movimientos_inventario/{{movdelId}}
+Content-Type: application/json 
+
+### Test 08: Try to delete a movimientos_inventario without a session token
+### Negative test
+DELETE {{BASE}}/movimientos_inventario/{{movId}}
+

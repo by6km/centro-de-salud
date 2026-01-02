@@ -1,0 +1,250 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Gestión de Almacén - Centro Médico</title>
+    <link rel="stylesheet" href="../css/estilos.css">
+    <link rel="stylesheet" href="../css/dashboard.css">
+    <link rel="stylesheet" href="../css/responsive.css">
+</head>
+<body>
+    <!-- NAVEGACIÓN DASHBOARD -->
+    <nav class="navbar-dashboard">
+        <div class="navbar-dashboard-content">
+            <div class="logo-dashboard">
+                <h1>🏥 Centro Médico (Empleado)</h1>
+            </div>
+            <ul class="nav-menu-dashboard">
+                <li><a href="dashboard.html">Dashboard</a></li>
+                <li><a href="pacientes.html">Pacientes</a></li>
+                <li><a href="turnos.html">Turnos</a></li>
+                <li><a href="almacen.html" class="active">Almacén</a></li>
+                <li><a href="#" onclick="cerrarSesion()" class="btn-logout">Cerrar Sesión</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <div class="dashboard-container">
+        <!-- SIDEBAR -->
+        <aside class="sidebar">
+            <div class="user-card">
+                <div class="user-avatar">👨‍⚕️</div>
+                <div class="user-info">
+                    <h3 id="nombreEmpleado">Dr. Nombre</h3>
+                    <p id="tipoEmpleado">Empleado</p>
+                </div>
+            </div>
+
+            <nav class="sidebar-menu">
+                <a href="dashboard.html" class="menu-item">
+                    <span class="menu-icon">📊</span>
+                    <span>Dashboard</span>
+                </a>
+                <a href="pacientes.html" class="menu-item">
+                    <span class="menu-icon">👥</span>
+                    <span>Pacientes</span>
+                </a>
+                <a href="turnos.html" class="menu-item">
+                    <span class="menu-icon">📅</span>
+                    <span>Turnos y Citas</span>
+                </a>
+                <a href="almacen.html" class="menu-item active">
+                    <span class="menu-icon">🏪</span>
+                    <span>Almacén</span>
+                </a>
+            </nav>
+        </aside>
+
+        <!-- CONTENIDO PRINCIPAL -->
+        <main class="main-content">
+            <div class="page-header-dashboard">
+                <h2>Gestión de Almacén</h2>
+                <p>Control de medicamentos e inventario del centro</p>
+            </div>
+
+            <!-- ALERTAS -->
+            <div id="alertaError" class="alert alert-error" style="display: none;"></div>
+            <div id="alertaExito" class="alert alert-success" style="display: none;"></div>
+
+            <!-- FILTROS Y BÚSQUEDA -->
+            <section class="filter-section">
+                <div class="search-bar">
+                    <input 
+                        type="text" 
+                        id="busqueda" 
+                        placeholder="Buscar medicamento..."
+                        onkeyup="filtrarMedicamentos()"
+                    >
+                </div>
+                <div class="filter-buttons">
+                    <button class="btn btn-secondary" onclick="filtrarPor('disponible')">Disponibles</button>
+                    <button class="btn btn-warning" onclick="filtrarPor('bajo_stock')">Bajo Stock</button>
+                    <button class="btn btn-danger" onclick="filtrarPor('agotado')">Agotados</button>
+                    <button class="btn btn-primary" onclick="mostrarFormularioAgregar()">+ Agregar Medicamento</button>
+                </div>
+            </section>
+
+            <!-- ESTADÍSTICAS RÁPIDAS -->
+            <section class="dashboard-cards">
+                <div class="card card-primary">
+                    <div class="card-icon">📦</div>
+                    <div class="card-content">
+                        <h3>Total de Medicamentos</h3>
+                        <p id="totalMedicamentos">0</p>
+                    </div>
+                </div>
+
+                <div class="card card-warning">
+                    <div class="card-icon">⚠️</div>
+                    <div class="card-content">
+                        <h3>Bajo Stock</h3>
+                        <p id="bajoStock">0</p>
+                    </div>
+                </div>
+
+                <div class="card card-danger">
+                    <div class="card-icon">❌</div>
+                    <div class="card-content">
+                        <h3>Agotados</h3>
+                        <p id="agotados">0</p>
+                    </div>
+                </div>
+
+                <div class="card card-info">
+                    <div class="card-icon">💰</div>
+                    <div class="card-content">
+                        <h3>Valor Total</h3>
+                        <p id="valorTotal">$0.00</p>
+                    </div>
+                </div>
+            </section>
+
+            <!-- TABLA DE MEDICAMENTOS -->
+            <section class="dashboard-section">
+                <h3>💊 Inventario Actual</h3>
+                <div class="table-responsive">
+                    <table class="inventory-table" id="tablaInventario">
+                        <thead>
+                            <tr>
+                                <th>Código</th>
+                                <th>Nombre del Medicamento</th>
+                                <th>Categoría</th>
+                                <th>Cantidad</th>
+                                <th>Mínimo</th>
+                                <th>Precio Unit.</th>
+                                <th>Vencimiento</th>
+                                <th>Estado</th>
+                                <th>Acciones</th>
+                            </tr>
+                        </thead>
+                        <tbody id="cuerpoTabla">
+                            <tr>
+                                <td colspan="9" class="text-center loading">Cargando medicamentos...</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </section>
+
+            <!-- MEDICAMENTOS CON BAJO STOCK -->
+            <section class="dashboard-section">
+                <h3>⚠️ Medicamentos con Bajo Stock (Requieren Reorden)</h3>
+                <div id="bajoStockList" class="warning-list">
+                    <p>No hay medicamentos con bajo stock</p>
+                </div>
+            </section>
+
+            <!-- MEDICAMENTOS VENCIDOS -->
+            <section class="dashboard-section">
+                <h3>❌ Medicamentos Próximos a Vencer</h3>
+                <div id="vencidosList" class="danger-list">
+                    <p>No hay medicamentos próximos a vencer</p>
+                </div>
+            </section>
+        </main>
+    </div>
+
+    <!-- MODAL AGREGAR MEDICAMENTO -->
+    <div id="modalAgregarMedicamento" class="modal" style="display: none;">
+        <div class="modal-content">
+            <span class="close" onclick="cerrarModal()">&times;</span>
+            <h2>Agregar Nuevo Medicamento</h2>
+            
+            <form id="formAgregarMedicamento" class="form-layout">
+                <div class="form-row">
+                    <div class="form-group">
+                        <label for="nombre">Nombre del Medicamento *</label>
+                        <input type="text" id="nombre" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="codigo">Código *</label>
+                        <input type="text" id="codigo" required>
+                    </div>
+                </div>
+
+                <div class="form-row">
+                    <div class="form-group">
+                        <label for="categoria">Categoría *</label>
+                        <input type="text" id="categoria" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="cantidad">Cantidad *</label>
+                        <input type="number" id="cantidad" required min="0">
+                    </div>
+                </div>
+
+                <div class="form-row">
+                    <div class="form-group">
+                        <label for="precio">Precio Unitario *</label>
+                        <input type="number" id="precio" required min="0" step="0.01">
+                    </div>
+                    <div class="form-group">
+                        <label for="minimo">Cantidad Mínima *</label>
+                        <input type="number" id="minimo" required min="0">
+                    </div>
+                </div>
+
+                <div class="form-row">
+                    <div class="form-group">
+                        <label for="vencimiento">Fecha de Vencimiento *</label>
+                        <input type="date" id="vencimiento" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="proveedor">Proveedor</label>
+                        <input type="text" id="proveedor">
+                    </div>
+                </div>
+
+                <div class="form-actions">
+                    <button type="submit" class="btn btn-primary">Guardar Medicamento</button>
+                    <button type="button" class="btn btn-secondary" onclick="cerrarModal()">Cancelar</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <!-- MODAL EDITAR CANTIDAD -->
+    <div id="modalEditarCantidad" class="modal" style="display: none;">
+        <div class="modal-content small">
+            <span class="close" onclick="cerrarModalEditarCantidad()">&times;</span>
+            <h2>Actualizar Cantidad</h2>
+            
+            <form id="formEditarCantidad">
+                <div class="form-group">
+                    <label for="nuevaCantidad">Nueva Cantidad *</label>
+                    <input type="number" id="nuevaCantidad" required min="0">
+                </div>
+                <div class="form-actions">
+                    <button type="submit" class="btn btn-primary">Actualizar</button>
+                    <button type="button" class="btn btn-secondary" onclick="cerrarModalEditarCantidad()">Cancelar</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <script src="../js/api-client.js"></script>
+    <script src="../js/auth.js"></script>
+    <script src="../js/empleado/almacen.js"></script>
+</body>
+</html>

@@ -1,0 +1,157 @@
+
+### This is an auto-generated test suite, it needs to be completed with valid data.
+### These are not all tests you need, more of them should be created to evaluate the functional
+### requirements of your project. These tests only test the CRUD endpoints of the entity.
+### Silence is a DEAL research team project, more info about us in https://deal.us.es
+@BASE = http://127.0.0.1:8085/api/v1
+
+### Auxiliary query
+### Positive test
+### Test 00: Get all existing servicios_consultas
+### This query is used in several of the below tests it should be executed first.
+# @name servicios_consultas
+GET {{BASE}}/servicios_consultas
+
+### Login a(n) usuarios and save the generated token 
+### This token is used in several of the below tests it should be executed second.
+# @name login
+POST {{BASE}}/login 
+Content-Type: application/json 
+
+{ 
+	"nombre_usuario": ###REPLACE###,
+	"contrasena": ###REPLACE###
+}
+
+###
+@token = {{login.response.body.sessionToken}}
+
+
+### TESTS BEGIN
+
+### Test 01: Get one existing servicios_consultas by its id.
+### positive test 
+@serId = {{servicios_consultas.response.body.0.servicio_id}}
+GET {{BASE}}/servicios_consultas/{{serId}} 
+Content-Type: application/json 
+
+
+### Test 02: Try get one existing servicios_consultas by its nonexistent id.
+### negative test 
+GET {{BASE}}/servicios_consultas/999999999
+Content-Type: application/json 
+
+
+### Test 03: Add a new servicios_consultas successfully
+### Positive test 
+### We assume that the token has been aquired by the login request.
+# @name newservicios_consultas
+POST {{BASE}}/servicios_consultas 
+Content-Type: application/json 
+Token: {{token}} 
+
+{
+	"nombre_servicio": ###REPLACE###,
+	"descripcion": ###REPLACE###,
+	"precio_base": ###REPLACE###,
+	"duracion_estimada": ###REPLACE###,
+	"especialidad_id": ###REPLACE###,
+	"activo": ###REPLACE###,
+	"fecha_creacion": ###REPLACE###
+} 
+
+### Check the created servicios_consultas
+
+@newservicios_consultasid = {{newservicios_consultas.response.body.lastId}}
+GET {{BASE}}/servicios_consultas/{{newservicios_consultasid}}
+Content-Type: application/json 
+
+### Test 04: Add a new servicios_consultas without a session token
+### Negative test 
+POST {{BASE}}/servicios_consultas 
+Content-Type: application/json 
+
+{ 
+	"nombre_servicio": ###REPLACE###,
+	"descripcion": ###REPLACE###,
+	"precio_base": ###REPLACE###,
+	"duracion_estimada": ###REPLACE###,
+	"especialidad_id": ###REPLACE###,
+	"activo": ###REPLACE###,
+	"fecha_creacion": ###REPLACE###
+}
+
+### Test 05: Modify an existing servicios_consultas 
+### Positive test 
+@serId = {{servicios_consultas.response.body.0.servicio_id}} 
+PUT {{BASE}}/servicios_consultas/{{serId}} 
+Content-Type: application/json 
+Token: {{token}} 
+
+{ 
+	"nombre_servicio": ###REPLACE###,
+	"descripcion": ###REPLACE###,
+	"precio_base": ###REPLACE###,
+	"duracion_estimada": ###REPLACE###,
+	"especialidad_id": ###REPLACE###,
+	"activo": ###REPLACE###,
+	"fecha_creacion": ###REPLACE###
+}
+
+### Check the modified servicios_consultas
+
+GET {{BASE}}/servicios_consultas/{{newservicios_consultasid}}
+Content-Type: application/json 
+
+### Test 06: Try to modify an existing servicios_consultas without a session token
+### Negative test
+@serId = {{servicios_consultas.response.body.0.servicio_id}}
+PUT {{BASE}}/servicios_consultas/{{serId}}
+Content-Type: application/json
+
+{
+	"nombre_servicio": ###REPLACE###,
+	"descripcion": ###REPLACE###,
+	"precio_base": ###REPLACE###,
+	"duracion_estimada": ###REPLACE###,
+	"especialidad_id": ###REPLACE###,
+	"activo": ###REPLACE###,
+	"fecha_creacion": ###REPLACE###
+}
+
+### Test 07: Delete an existing servicios_consultas
+### Positive test
+
+### Create a new servicios_consultas, which we will delete
+# @name createdserToDelete
+POST {{BASE}}/servicios_consultas
+Content-Type: application/json
+Token: {{token}}
+
+{
+	"nombre_servicio": ###REPLACE###,
+	"descripcion": ###REPLACE###,
+	"precio_base": ###REPLACE###,
+	"duracion_estimada": ###REPLACE###,
+	"especialidad_id": ###REPLACE###,
+	"activo": ###REPLACE###,
+	"fecha_creacion": ###REPLACE###
+}
+
+### Check the created servicios_consultas
+@serdelId = {{createdserToDelete.response.body.lastId}}
+GET {{BASE}}/servicios_consultas/{{serdelId}}
+Content-Type: application/json 
+
+### Delete the servicios_consultas
+DELETE {{BASE}}/servicios_consultas/{{serdelId}}
+Token: {{token}}
+
+### Check the deleted servicios_consultas
+GET {{BASE}}/servicios_consultas/{{serdelId}}
+Content-Type: application/json 
+
+### Test 08: Try to delete a servicios_consultas without a session token
+### Negative test
+DELETE {{BASE}}/servicios_consultas/{{serId}}
+

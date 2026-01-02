@@ -1,0 +1,192 @@
+
+### This is an auto-generated test suite, it needs to be completed with valid data.
+### These are not all tests you need, more of them should be created to evaluate the functional
+### requirements of your project. These tests only test the CRUD endpoints of the entity.
+### Silence is a DEAL research team project, more info about us in https://deal.us.es
+@BASE = http://127.0.0.1:8085/api/v1
+
+### Auxiliary query
+### Positive test
+### Test 00: Get all existing expedientes_medicos
+### This query is used in several of the below tests it should be executed first.
+# @name expedientes_medicos
+GET {{BASE}}/expedientes_medicos
+
+### Login a(n) usuarios and save the generated token 
+### This token is used in several of the below tests it should be executed second.
+# @name login
+POST {{BASE}}/login 
+Content-Type: application/json 
+
+{ 
+	"nombre_usuario": ###REPLACE###,
+	"contrasena": ###REPLACE###
+}
+
+###
+@token = {{login.response.body.sessionToken}}
+
+
+### TESTS BEGIN
+
+### Test 01: Get one existing expedientes_medicos by its id.
+### positive test 
+@expId = {{expedientes_medicos.response.body.0.expediente_id}}
+GET {{BASE}}/expedientes_medicos/{{expId}} 
+Content-Type: application/json 
+
+
+### Test 02: Try get one existing expedientes_medicos by its nonexistent id.
+### negative test 
+GET {{BASE}}/expedientes_medicos/999999999
+Content-Type: application/json 
+
+
+### Test 03: Add a new expedientes_medicos successfully
+### Positive test 
+### We assume that the token has been aquired by the login request.
+# @name newexpedientes_medicos
+POST {{BASE}}/expedientes_medicos 
+Content-Type: application/json 
+Token: {{token}} 
+
+{
+	"paciente_id": ###REPLACE###,
+	"peso_actual": ###REPLACE###,
+	"altura": ###REPLACE###,
+	"presion_arterial": ###REPLACE###,
+	"frecuencia_cardiaca": ###REPLACE###,
+	"temperatura": ###REPLACE###,
+	"indice_masa_corporal": ###REPLACE###,
+	"observaciones_medicas": ###REPLACE###,
+	"diagnosticos_previos": ###REPLACE###,
+	"medicamentos_actuales": ###REPLACE###,
+	"operaciones_previas": ###REPLACE###,
+	"vacunas": ###REPLACE###,
+	"fecha_ultima_consulta": ###REPLACE###,
+	"fecha_actualizacion": ###REPLACE###
+} 
+
+### Check the created expedientes_medicos
+
+@newexpedientes_medicosid = {{newexpedientes_medicos.response.body.lastId}}
+GET {{BASE}}/expedientes_medicos/{{newexpedientes_medicosid}}
+Content-Type: application/json 
+
+### Test 04: Add a new expedientes_medicos without a session token
+### Negative test 
+POST {{BASE}}/expedientes_medicos 
+Content-Type: application/json 
+
+{ 
+	"paciente_id": ###REPLACE###,
+	"peso_actual": ###REPLACE###,
+	"altura": ###REPLACE###,
+	"presion_arterial": ###REPLACE###,
+	"frecuencia_cardiaca": ###REPLACE###,
+	"temperatura": ###REPLACE###,
+	"indice_masa_corporal": ###REPLACE###,
+	"observaciones_medicas": ###REPLACE###,
+	"diagnosticos_previos": ###REPLACE###,
+	"medicamentos_actuales": ###REPLACE###,
+	"operaciones_previas": ###REPLACE###,
+	"vacunas": ###REPLACE###,
+	"fecha_ultima_consulta": ###REPLACE###,
+	"fecha_actualizacion": ###REPLACE###
+}
+
+### Test 05: Modify an existing expedientes_medicos 
+### Positive test 
+@expId = {{expedientes_medicos.response.body.0.expediente_id}} 
+PUT {{BASE}}/expedientes_medicos/{{expId}} 
+Content-Type: application/json 
+Token: {{token}} 
+
+{ 
+	"paciente_id": ###REPLACE###,
+	"peso_actual": ###REPLACE###,
+	"altura": ###REPLACE###,
+	"presion_arterial": ###REPLACE###,
+	"frecuencia_cardiaca": ###REPLACE###,
+	"temperatura": ###REPLACE###,
+	"indice_masa_corporal": ###REPLACE###,
+	"observaciones_medicas": ###REPLACE###,
+	"diagnosticos_previos": ###REPLACE###,
+	"medicamentos_actuales": ###REPLACE###,
+	"operaciones_previas": ###REPLACE###,
+	"vacunas": ###REPLACE###,
+	"fecha_ultima_consulta": ###REPLACE###,
+	"fecha_actualizacion": ###REPLACE###
+}
+
+### Check the modified expedientes_medicos
+
+GET {{BASE}}/expedientes_medicos/{{newexpedientes_medicosid}}
+Content-Type: application/json 
+
+### Test 06: Try to modify an existing expedientes_medicos without a session token
+### Negative test
+@expId = {{expedientes_medicos.response.body.0.expediente_id}}
+PUT {{BASE}}/expedientes_medicos/{{expId}}
+Content-Type: application/json
+
+{
+	"paciente_id": ###REPLACE###,
+	"peso_actual": ###REPLACE###,
+	"altura": ###REPLACE###,
+	"presion_arterial": ###REPLACE###,
+	"frecuencia_cardiaca": ###REPLACE###,
+	"temperatura": ###REPLACE###,
+	"indice_masa_corporal": ###REPLACE###,
+	"observaciones_medicas": ###REPLACE###,
+	"diagnosticos_previos": ###REPLACE###,
+	"medicamentos_actuales": ###REPLACE###,
+	"operaciones_previas": ###REPLACE###,
+	"vacunas": ###REPLACE###,
+	"fecha_ultima_consulta": ###REPLACE###,
+	"fecha_actualizacion": ###REPLACE###
+}
+
+### Test 07: Delete an existing expedientes_medicos
+### Positive test
+
+### Create a new expedientes_medicos, which we will delete
+# @name createdexpToDelete
+POST {{BASE}}/expedientes_medicos
+Content-Type: application/json
+Token: {{token}}
+
+{
+	"paciente_id": ###REPLACE###,
+	"peso_actual": ###REPLACE###,
+	"altura": ###REPLACE###,
+	"presion_arterial": ###REPLACE###,
+	"frecuencia_cardiaca": ###REPLACE###,
+	"temperatura": ###REPLACE###,
+	"indice_masa_corporal": ###REPLACE###,
+	"observaciones_medicas": ###REPLACE###,
+	"diagnosticos_previos": ###REPLACE###,
+	"medicamentos_actuales": ###REPLACE###,
+	"operaciones_previas": ###REPLACE###,
+	"vacunas": ###REPLACE###,
+	"fecha_ultima_consulta": ###REPLACE###,
+	"fecha_actualizacion": ###REPLACE###
+}
+
+### Check the created expedientes_medicos
+@expdelId = {{createdexpToDelete.response.body.lastId}}
+GET {{BASE}}/expedientes_medicos/{{expdelId}}
+Content-Type: application/json 
+
+### Delete the expedientes_medicos
+DELETE {{BASE}}/expedientes_medicos/{{expdelId}}
+Token: {{token}}
+
+### Check the deleted expedientes_medicos
+GET {{BASE}}/expedientes_medicos/{{expdelId}}
+Content-Type: application/json 
+
+### Test 08: Try to delete a expedientes_medicos without a session token
+### Negative test
+DELETE {{BASE}}/expedientes_medicos/{{expId}}
+

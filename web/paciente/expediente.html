@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Expediente Médico - Centro Médico</title>
+    <link rel="stylesheet" href="../css/estilos.css">
+    <link rel="stylesheet" href="../css/dashboard.css">
+    <link rel="stylesheet" href="../css/responsive.css">
+</head>
+<body>
+    <!-- NAVEGACIÓN DASHBOARD -->
+    <nav class="navbar-dashboard">
+        <div class="navbar-dashboard-content">
+            <div class="logo-dashboard">
+                <h1>🏥 Centro Médico</h1>
+            </div>
+            <ul class="nav-menu-dashboard">
+                <li><a href="dashboard.html">Dashboard</a></li>
+                <li><a href="pedir-cita.html">Pedir Cita</a></li>
+                <li><a href="mis-citas.html">Mis Citas</a></li>
+                <li><a href="perfil.html">Mi Perfil</a></li>
+                <li><a href="expediente.html" class="active">Expediente</a></li>
+                <li><a href="#" onclick="cerrarSesion()" class="btn-logout">Cerrar Sesión</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <div class="dashboard-container">
+        <!-- SIDEBAR -->
+        <aside class="sidebar">
+            <div class="user-card">
+                <div class="user-avatar">👤</div>
+                <div class="user-info">
+                    <h3 id="nombrePaciente">Nombre Paciente</h3>
+                    <p id="tipoPaciente">Paciente</p>
+                </div>
+            </div>
+
+            <nav class="sidebar-menu">
+                <a href="dashboard.html" class="menu-item">
+                    <span class="menu-icon">📊</span>
+                    <span>Dashboard</span>
+                </a>
+                <a href="pedir-cita.html" class="menu-item">
+                    <span class="menu-icon">📅</span>
+                    <span>Pedir Cita</span>
+                </a>
+                <a href="mis-citas.html" class="menu-item">
+                    <span class="menu-icon">📋</span>
+                    <span>Mis Citas</span>
+                </a>
+                <a href="perfil.html" class="menu-item">
+                    <span class="menu-icon">👤</span>
+                    <span>Mi Perfil</span>
+                </a>
+                <a href="expediente.html" class="menu-item active">
+                    <span class="menu-icon">📄</span>
+                    <span>Expediente</span>
+                </a>
+            </nav>
+        </aside>
+
+        <!-- CONTENIDO PRINCIPAL -->
+        <main class="main-content">
+            <div class="page-header-dashboard">
+                <h2>Mi Expediente Médico</h2>
+                <p>Información médica completa y actual</p>
+            </div>
+
+            <!-- DATOS VITALES ACTUALES -->
+            <section class="dashboard-section">
+                <h3>📊 Datos Vitales Actuales</h3>
+                <div class="vitals-grid">
+                    <div class="vital-card">
+                        <label>Peso</label>
+                        <p id="peso" class="vital-value">- kg</p>
+                    </div>
+                    <div class="vital-card">
+                        <label>Altura</label>
+                        <p id="altura" class="vital-value">- cm</p>
+                    </div>
+                    <div class="vital-card">
+                        <label>IMC</label>
+                        <p id="imc" class="vital-value">-</p>
+                    </div>
+                    <div class="vital-card">
+                        <label>Presión Arterial</label>
+                        <p id="presion" class="vital-value">-</p>
+                    </div>
+                </div>
+            </section>
+
+            <!-- INFORMACIÓN MÉDICA GENERAL -->
+            <section class="dashboard-section">
+                <h3>🏥 Información Médica</h3>
+                <div class="medical-details">
+                    <div class="detail-group">
+                        <label><strong>Tipo de Sangre:</strong></label>
+                        <p id="tipoSangre">No especificado</p>
+                    </div>
+                    <div class="detail-group">
+                        <label><strong>Alergias:</strong></label>
+                        <p id="alergias">No registradas</p>
+                    </div>
+                    <div class="detail-group">
+                        <label><strong>Enfermedades Crónicas:</strong></label>
+                        <p id="enfermedades">No registradas</p>
+                    </div>
+                    <div class="detail-group">
+                        <label><strong>Medicamentos Actuales:</strong></label>
+                        <p id="medicamentos">No registrados</p>
+                    </div>
+                </div>
+            </section>
+
+            <!-- HISTORIAL MÉDICO -->
+            <section class="dashboard-section">
+                <h3>📋 Diagnósticos Previos</h3>
+                <div id="diagnosticos" class="history-list">
+                    <p>No hay diagnósticos registrados</p>
+                </div>
+            </section>
+
+            <!-- OPERACIONES PREVIAS -->
+            <section class="dashboard-section">
+                <h3>🏥 Operaciones Previas</h3>
+                <div id="operaciones" class="history-list">
+                    <p>No hay operaciones registradas</p>
+                </div>
+            </section>
+
+            <!-- HISTORIAL DE CITAS -->
+            <section class="dashboard-section">
+                <h3>📅 Historial de Citas</h3>
+                <div id="citasHistorial" class="citas-list">
+                    <p class="loading">Cargando historial...</p>
+                </div>
+            </section>
+
+            <!-- VACUNAS -->
+            <section class="dashboard-section">
+                <h3>💉 Registro de Vacunas</h3>
+                <div id="vacunas" class="vaccines-list">
+                    <p>No hay vacunas registradas</p>
+                </div>
+            </section>
+        </main>
+    </div>
+
+    <script src="../js/api-client.js"></script>
+    <script src="../js/auth.js"></script>
+    <script src="../js/paciente/expediente.js"></script>
+</body>
+</html>

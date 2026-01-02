@@ -1,0 +1,80 @@
+{
+    "getAll": {
+        "description": "Gets all entries from 'citas_medicas'",
+        "route": "/citas_medicas",
+        "method": "GET",
+        "sql": "SELECT * FROM citas_medicas",
+        "auth_required": false,
+        "allowed_roles": [
+            "*"
+        ]
+    },
+    "getById": {
+        "description": "Gets an entry from 'citas_medicas' by its primary key",
+        "route": "/citas_medicas/$cita_id",
+        "method": "GET",
+        "sql": "SELECT * FROM citas_medicas WHERE cita_id = $cita_id",
+        "auth_required": false,
+        "allowed_roles": [
+            "*"
+        ]
+    },
+    "create": {
+        "description": "Creates a new entry in 'citas_medicas'",
+        "route": "/citas_medicas",
+        "method": "POST",
+        "sql": "INSERT INTO citas_medicas (paciente_id, empleado_id, especialidad_id, fecha_cita, hora_cita, motivo_consulta, estado, notas_medicas, medicamentos_recetados, proxima_cita_recomendada, fecha_creacion, fecha_actualizacion) VALUES ($paciente_id, $empleado_id, $especialidad_id, $fecha_cita, $hora_cita, $motivo_consulta, $estado, $notas_medicas, $medicamentos_recetados, $proxima_cita_recomendada, $fecha_creacion, $fecha_actualizacion)",
+        "request_body_params": [
+            "paciente_id",
+            "empleado_id",
+            "especialidad_id",
+            "fecha_cita",
+            "hora_cita",
+            "motivo_consulta",
+            "estado",
+            "notas_medicas",
+            "medicamentos_recetados",
+            "proxima_cita_recomendada",
+            "fecha_creacion",
+            "fecha_actualizacion"
+        ],
+        "auth_required": true,
+        "allowed_roles": [
+            "*"
+        ]
+    },
+    "update": {
+        "description": "Updates an existing entry in 'citas_medicas' by its primary key",
+        "route": "/citas_medicas/$cita_id",
+        "method": "PUT",
+        "sql": "UPDATE citas_medicas SET paciente_id = $paciente_id, empleado_id = $empleado_id, especialidad_id = $especialidad_id, fecha_cita = $fecha_cita, hora_cita = $hora_cita, motivo_consulta = $motivo_consulta, estado = $estado, notas_medicas = $notas_medicas, medicamentos_recetados = $medicamentos_recetados, proxima_cita_recomendada = $proxima_cita_recomendada, fecha_creacion = $fecha_creacion, fecha_actualizacion = $fecha_actualizacion WHERE cita_id = $cita_id",
+        "request_body_params": [
+            "paciente_id",
+            "empleado_id",
+            "especialidad_id",
+            "fecha_cita",
+            "hora_cita",
+            "motivo_consulta",
+            "estado",
+            "notas_medicas",
+            "medicamentos_recetados",
+            "proxima_cita_recomendada",
+            "fecha_creacion",
+            "fecha_actualizacion"
+        ],
+        "auth_required": true,
+        "allowed_roles": [
+            "*"
+        ]
+    },
+    "delete": {
+        "description": "Deletes an existing entry in 'citas_medicas' by its primary key",
+        "route": "/citas_medicas/$cita_id",
+        "method": "DELETE",
+        "sql": "DELETE FROM citas_medicas WHERE cita_id = $cita_id",
+        "auth_required": true,
+        "allowed_roles": [
+            "*"
+        ]
+    }
+}

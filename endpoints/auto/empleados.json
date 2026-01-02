@@ -1,0 +1,92 @@
+{
+    "getAll": {
+        "description": "Gets all entries from 'empleados'",
+        "route": "/empleados",
+        "method": "GET",
+        "sql": "SELECT * FROM empleados",
+        "auth_required": false,
+        "allowed_roles": [
+            "*"
+        ]
+    },
+    "getById": {
+        "description": "Gets an entry from 'empleados' by its primary key",
+        "route": "/empleados/$empleado_id",
+        "method": "GET",
+        "sql": "SELECT * FROM empleados WHERE empleado_id = $empleado_id",
+        "auth_required": false,
+        "allowed_roles": [
+            "*"
+        ]
+    },
+    "create": {
+        "description": "Creates a new entry in 'empleados'",
+        "route": "/empleados",
+        "method": "POST",
+        "sql": "INSERT INTO empleados (usuario_id, nombre_completo, apellidos, numero_identidad, especializacion, especialidad_id, numero_licencia_medica, numero_telefono, email_laboral, fecha_contratacion, estado, horarios_trabajo, direccion, ciudad, codigo_postal, provincia, fecha_creacion, fecha_actualizacion) VALUES ($usuario_id, $nombre_completo, $apellidos, $numero_identidad, $especializacion, $especialidad_id, $numero_licencia_medica, $numero_telefono, $email_laboral, $fecha_contratacion, $estado, $horarios_trabajo, $direccion, $ciudad, $codigo_postal, $provincia, $fecha_creacion, $fecha_actualizacion)",
+        "request_body_params": [
+            "usuario_id",
+            "nombre_completo",
+            "apellidos",
+            "numero_identidad",
+            "especializacion",
+            "especialidad_id",
+            "numero_licencia_medica",
+            "numero_telefono",
+            "email_laboral",
+            "fecha_contratacion",
+            "estado",
+            "horarios_trabajo",
+            "direccion",
+            "ciudad",
+            "codigo_postal",
+            "provincia",
+            "fecha_creacion",
+            "fecha_actualizacion"
+        ],
+        "auth_required": true,
+        "allowed_roles": [
+            "*"
+        ]
+    },
+    "update": {
+        "description": "Updates an existing entry in 'empleados' by its primary key",
+        "route": "/empleados/$empleado_id",
+        "method": "PUT",
+        "sql": "UPDATE empleados SET usuario_id = $usuario_id, nombre_completo = $nombre_completo, apellidos = $apellidos, numero_identidad = $numero_identidad, especializacion = $especializacion, especialidad_id = $especialidad_id, numero_licencia_medica = $numero_licencia_medica, numero_telefono = $numero_telefono, email_laboral = $email_laboral, fecha_contratacion = $fecha_contratacion, estado = $estado, horarios_trabajo = $horarios_trabajo, direccion = $direccion, ciudad = $ciudad, codigo_postal = $codigo_postal, provincia = $provincia, fecha_creacion = $fecha_creacion, fecha_actualizacion = $fecha_actualizacion WHERE empleado_id = $empleado_id",
+        "request_body_params": [
+            "usuario_id",
+            "nombre_completo",
+            "apellidos",
+            "numero_identidad",
+            "especializacion",
+            "especialidad_id",
+            "numero_licencia_medica",
+            "numero_telefono",
+            "email_laboral",
+            "fecha_contratacion",
+            "estado",
+            "horarios_trabajo",
+            "direccion",
+            "ciudad",
+            "codigo_postal",
+            "provincia",
+            "fecha_creacion",
+            "fecha_actualizacion"
+        ],
+        "auth_required": true,
+        "allowed_roles": [
+            "*"
+        ]
+    },
+    "delete": {
+        "description": "Deletes an existing entry in 'empleados' by its primary key",
+        "route": "/empleados/$empleado_id",
+        "method": "DELETE",
+        "sql": "DELETE FROM empleados WHERE empleado_id = $empleado_id",
+        "auth_required": true,
+        "allowed_roles": [
+            "*"
+        ]
+    }
+}

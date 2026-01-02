@@ -1,0 +1,70 @@
+{
+    "getAll": {
+        "description": "Gets all entries from 'servicios_consultas'",
+        "route": "/servicios_consultas",
+        "method": "GET",
+        "sql": "SELECT * FROM servicios_consultas",
+        "auth_required": false,
+        "allowed_roles": [
+            "*"
+        ]
+    },
+    "getById": {
+        "description": "Gets an entry from 'servicios_consultas' by its primary key",
+        "route": "/servicios_consultas/$servicio_id",
+        "method": "GET",
+        "sql": "SELECT * FROM servicios_consultas WHERE servicio_id = $servicio_id",
+        "auth_required": false,
+        "allowed_roles": [
+            "*"
+        ]
+    },
+    "create": {
+        "description": "Creates a new entry in 'servicios_consultas'",
+        "route": "/servicios_consultas",
+        "method": "POST",
+        "sql": "INSERT INTO servicios_consultas (nombre_servicio, descripcion, precio_base, duracion_estimada, especialidad_id, activo, fecha_creacion) VALUES ($nombre_servicio, $descripcion, $precio_base, $duracion_estimada, $especialidad_id, $activo, $fecha_creacion)",
+        "request_body_params": [
+            "nombre_servicio",
+            "descripcion",
+            "precio_base",
+            "duracion_estimada",
+            "especialidad_id",
+            "activo",
+            "fecha_creacion"
+        ],
+        "auth_required": true,
+        "allowed_roles": [
+            "*"
+        ]
+    },
+    "update": {
+        "description": "Updates an existing entry in 'servicios_consultas' by its primary key",
+        "route": "/servicios_consultas/$servicio_id",
+        "method": "PUT",
+        "sql": "UPDATE servicios_consultas SET nombre_servicio = $nombre_servicio, descripcion = $descripcion, precio_base = $precio_base, duracion_estimada = $duracion_estimada, especialidad_id = $especialidad_id, activo = $activo, fecha_creacion = $fecha_creacion WHERE servicio_id = $servicio_id",
+        "request_body_params": [
+            "nombre_servicio",
+            "descripcion",
+            "precio_base",
+            "duracion_estimada",
+            "especialidad_id",
+            "activo",
+            "fecha_creacion"
+        ],
+        "auth_required": true,
+        "allowed_roles": [
+            "*"
+        ]
+    },
+    "delete": {
+        "description": "Deletes an existing entry in 'servicios_consultas' by its primary key",
+        "route": "/servicios_consultas/$servicio_id",
+        "method": "DELETE",
+        "sql": "DELETE FROM servicios_consultas WHERE servicio_id = $servicio_id",
+        "auth_required": true,
+        "allowed_roles": [
+            "*"
+        ]
+    }
+}
